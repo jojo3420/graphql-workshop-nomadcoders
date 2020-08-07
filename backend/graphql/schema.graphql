@@ -1,0 +1,54 @@
+type Person {
+    id: Int!
+    name: String!
+    age: Int!
+    gender: String!
+}
+
+type Animal {
+    id: Int!
+    name: String!
+    weight: Float!
+    gender: Boolean
+}
+
+type Movie {
+    id: Int!
+    title: String!
+    author: String!
+    score: Float!
+}
+
+# 외부 api 랑 랩핑 할때는 필드값을 맞춰 줘야 한다.
+#  medium_cover_image 를 mediumCoverImage 변경하면 에러 발생
+# promise<> 상태에서 에러 발생 .json응답이 모델로 변환 실패되는듯.
+type MovieX {
+    id: Int!
+    title: String!
+    rating: Float!
+    summary: String!
+    language: String
+    medium_cover_image: String
+}
+
+type Query {
+    greeting: String!
+
+    people: [Person]!
+    getPerson(id: Int!): Person
+
+    getAnimal(id: Int!): Animal
+    animals: [Animal]!
+
+    movies: [Movie]!
+    getMovie(id: Int!): Movie
+
+    moviesX(limit: Int, rating: Float): [MovieX]!
+    getMovieX(id: Int!): MovieX
+}
+
+type Mutation {
+    addMovie(title: String!, author: String!, score: Float!): Movie!
+    replaceMovie(id: Int!, title: String, author: String, score: Float): Movie
+    removeMovie(id: Int!): [Movie]!
+}
