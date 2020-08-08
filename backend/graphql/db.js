@@ -107,7 +107,9 @@ const getMovieByIdX = async (id) => {
   const response =  await axios.get(url);
   // console.log({ response })
   const movie = response.data.data.movie;
-  return movie;
+  // console.log({ movie })
+
+  return { ...movie,  summary: movie['description_intro']};
 
 
 }
