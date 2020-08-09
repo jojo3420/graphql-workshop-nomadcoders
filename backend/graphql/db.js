@@ -67,11 +67,17 @@ const createMovie = (movie) => {
 
 const modifyMovie = ({id, title, author, score}) => {
   const index = movies.findIndex(movie => movie.id === parseInt(id, 10));
-  if (index > -1) {
-    movies[index] = {...movies[index], title, author, score};
+  // console.log({ index })
+  if (movies[index]) {
+    movies[index] = {
+      ...movies[index],
+      ...(title && { title }),
+      ...(author && { author }),
+      ...(score && { score }),
+    };
     return movies[index];
   }
-  return false;
+  return null;
 };
 
 const removeMovieById = id => {
@@ -79,7 +85,7 @@ const removeMovieById = id => {
   if (index > -1) {
     return movies.splice(index, 1);
   }
-  return false;
+  return null;
 }
 
 /*
